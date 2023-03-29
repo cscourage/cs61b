@@ -1,50 +1,50 @@
-public class SLList {
-    private static class IntNode {
-        public int item;
-        public IntNode next;
+public class SLList<LochNess> {
+    private class StuffNode {
+        public LochNess item;
+        public StuffNode next;
 
-        public IntNode(int i, IntNode n) {
+        public StuffNode(LochNess i, StuffNode n) {
             item = i;
             next = n;
         }
     }
-    private IntNode sentinel;
+    private StuffNode sentinel;
     private int size;
-    private IntNode last;
+    private StuffNode last;
 
     public SLList() {
-        sentinel = new IntNode(63, null);
+        sentinel = new StuffNode(null, null);
         last = sentinel;
         size = 0;
     }
 
-    public SLList(int x) {
-        sentinel = new IntNode(63, null);
-        sentinel.next = new IntNode(x, null);
+    public SLList(LochNess x) {
+        sentinel = new StuffNode(null, null);
+        sentinel.next = new StuffNode(x, null);
         last = sentinel.next;
         size = 1;
     }
 
-    public void addFirst(int x) {
-        sentinel.next = new IntNode(x, sentinel.next);
+    public void addFirst(LochNess x) {
+        sentinel.next = new StuffNode(x, sentinel.next);
         size += 1;
         /* special case */
-        if (sentinel.next.next == null) {
+        if (last == sentinel) {
             last = sentinel.next;
         }
     }
 
-    public void addLast(int x) {
-        last.next = new IntNode(x, null);
+    public void addLast(LochNess x) {
+        last.next = new StuffNode(x, null);
         last = last.next;
         size += 1;
     }
 
-    public int getFirst() {
+    public LochNess getFirst() {
         return sentinel.next.item;
     }
 
-    public int getLast() {
+    public LochNess getLast() {
         return last.item;
     }
 
@@ -55,10 +55,11 @@ public class SLList {
     /*
      1.in order to remove the special case of addFirst for last pointer,
        we can add a final sentinel just like previous first;
-     2.but after it, we can see that the method getLast will be tricky;
+     2.but after it, we can see that the method getLast and addLast will be tricky;
      3.so it introduce the topic of DLList.
      */
 
+    /*
     public static void main(String[] args) {
         SLList L = new SLList();
         L.addFirst(15);
@@ -68,4 +69,5 @@ public class SLList {
         System.out.println("last: " + L.getLast());
         System.out.println("size: " + L.size());
     }
+     */
 }
