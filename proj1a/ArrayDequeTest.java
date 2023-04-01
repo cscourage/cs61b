@@ -33,7 +33,6 @@ public class ArrayDequeTest {
      * && is the "and" operation. */
     public static void addIsEmptySizeTest() {
         System.out.println("Running add/isEmpty/Size test.");
-        //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         ArrayDeque<String> arr = new ArrayDeque<>();
 
@@ -72,8 +71,6 @@ public class ArrayDequeTest {
 
         System.out.println("Running add/remove test.");
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-
         ArrayDeque<Integer> arr1 = new ArrayDeque<>();
         // should be empty
         boolean passed = checkEmpty(true, arr1.isEmpty());
@@ -85,6 +82,13 @@ public class ArrayDequeTest {
         arr1.removeFirst();
         // should be empty
         passed = checkEmpty(true, arr1.isEmpty()) && passed;
+
+        /* extra add. */
+        arr1.addLast(0);
+        arr1.addLast(1);
+        arr1.addLast(2);
+        arr1.addLast(3);
+        System.out.println(arr1.get(0));
 
         printTestStatus(passed);
     }

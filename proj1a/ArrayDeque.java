@@ -16,16 +16,16 @@ public class ArrayDeque<T> {
         last = 0;
     }
 
-    public int minusOne(int index) {
+    private int minusOne(int index) {
         return ((index + length - 1) % length);
     }
 
-    public  int plusOne(int index, int modul) {
+    private int plusOne(int index, int modul) {
         return (index + 1) % modul;
     }
 
     /* resize larger and we put the "front" in the location of "newarray" index 0. */
-    public void grow() {
+    private void grow() {
         T[] newarray = (T[]) new Object[length * 2];
         int ptr1 = front;
         int ptr2 = 0;
@@ -42,7 +42,7 @@ public class ArrayDeque<T> {
     }
 
     /* resize smaller and we put the "front" in the location of "newarray" index 0*/
-    public void shrink() {
+    private void shrink() {
         T[] newarray = (T[]) new Object[length / 2];
         int ptr1 = front;
         int ptr2 = 0;
@@ -127,6 +127,6 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        return array[plusOne(front + index, length)];
+        return array[(front + index) % length];
     }
 }

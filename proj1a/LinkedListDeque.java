@@ -1,8 +1,8 @@
 public class LinkedListDeque<T> {
     private class StuffNode {
-        public StuffNode prev;
-        public T item;
-        public StuffNode next;
+        private StuffNode prev;
+        private T item;
+        private StuffNode next;
 
         public StuffNode(StuffNode p, T i, StuffNode n) {
             prev = p;
@@ -23,6 +23,7 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
+    /*  the API don't need it.
     public LinkedListDeque(T item) {
         sentinelF = new StuffNode(null, null, null);
         sentinelB = new StuffNode(null, null, null);
@@ -31,6 +32,7 @@ public class LinkedListDeque<T> {
         sentinelB.prev = tmp;
         size = 1;
     }
+    */
 
     public void addFirst(T item) {
         sentinelF.next = new StuffNode(sentinelF, item, sentinelF.next);
@@ -98,7 +100,7 @@ public class LinkedListDeque<T> {
         return tmp.item;
     }
 
-    public T getRecursiveHelper(StuffNode p, int index) {
+    private T getRecursiveHelper(StuffNode p, int index) {
         if (index == 0) {
             return p.item;
         }

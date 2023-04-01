@@ -34,7 +34,6 @@ public class DLListCycleTest {
      * && is the "and" operation. */
     public static void addIsEmptySizeTest() {
         System.out.println("Running add/isEmpty/Size test.");
-        //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         DLListCycle<String> lld1 = new DLListCycle<>();
 
@@ -73,8 +72,6 @@ public class DLListCycleTest {
     public static void addRemoveTest() {
 
         System.out.println("Running add/remove test.");
-
-        //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         DLListCycle<Integer> lld1 = new DLListCycle<>();
         // should be empty
