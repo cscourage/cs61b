@@ -31,7 +31,8 @@ public class Palindrome {
         if (input.size() == 0) {
             return true;
         }
-        return input.removeLast() == word.charAt(index) && isPalindromeHelper(input, index + 1, word);
+        return input.removeLast() == word.charAt(index) &&
+                isPalindromeHelper(input, index + 1, word);
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
