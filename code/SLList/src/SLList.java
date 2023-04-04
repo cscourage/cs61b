@@ -52,6 +52,31 @@ public class SLList<LochNess> {
         return size;
     }
 
+    public LochNess removeLast() {
+        StuffNode p = sentinel;
+        LochNess result = last.item;
+        // special cases including size = 0
+        if (size == 0) {
+            return null;
+        }
+        while (p.next != last) {
+            p = p.next;
+        }
+        last = p;
+        p.next = null;
+        size--;
+        return result;
+    }
+
+    public void print() {
+        StuffNode p = sentinel.next;
+        while (p != null) {
+            System.out.print(p.item + " ");
+            p = p.next;
+        }
+        System.out.println();
+    }
+
     /*
      1.in order to remove the special case of addFirst for last pointer,
        we can add a final sentinel just like previous first;
@@ -59,7 +84,7 @@ public class SLList<LochNess> {
      3.so it introduce the topic of DLList.
      */
 
-    /*
+
     public static void main(String[] args) {
         SLList L = new SLList();
         L.addFirst(15);
@@ -69,5 +94,5 @@ public class SLList<LochNess> {
         System.out.println("last: " + L.getLast());
         System.out.println("size: " + L.size());
     }
-     */
+
 }
