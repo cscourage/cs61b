@@ -85,6 +85,8 @@ public class ArrayDeque<T> {
             return null;
         }
         T tmp = array[front];
+        // avoid loitering.
+        array[front] = null;
         front = plusOne(front, length);
         size--;
         if (length >= 16 && length / size >= 4) {
@@ -99,6 +101,8 @@ public class ArrayDeque<T> {
         }
         last = minusOne(last);
         T tmp = array[last];
+        //avoid loitering.
+        array[last] = null;
         size--;
         if (length >= 16 && length / size >= 4) {
             resize(length / 2);
