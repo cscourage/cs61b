@@ -1,10 +1,8 @@
-import edu.princeton.cs.algs4.ST;
-
 import java.util.*;
 
 public class LibraryDemo {
     public static String cleanString(String s) {
-        return s.toLowerCase().replaceAll("[^a-z]","");
+        return s.toLowerCase().replaceAll("[^a-z]", "");
     }
 
     public static List<String> getWords(String inputFileName) {
