@@ -24,37 +24,21 @@ public class ArrayDeque<T> {
         return (index + 1) % modul;
     }
 
-    /* resize larger and we put the "front" in the location of "newarray" index 0. */
-    private void grow() {
-        T[] newarray = (T[]) new Object[length * 2];
-        int ptr1 = front;
-        int ptr2 = 0;
-        //notice the last don't indicate a T element.
-        while (ptr1 != last) {
-            newarray[ptr2] = array[ptr1];
-            ptr1 = plusOne(ptr1, length);
-            ptr2 = plusOne(ptr2, length * 2);
-        }
-        front = 0;
-        last = ptr2;
-        array = newarray;
-        length *= 2;
-    }
 
-    /* resize smaller and we put the "front" in the location of "newarray" index 0*/
-    private void shrink() {
-        T[] newarray = (T[]) new Object[length / 2];
+    /* resize longer or smaller and we put the "front" in the location of "newarray" index 0*/
+    private void resize(int newlength) {
+        T[] newarray = (T[]) new Object[newlength];
         int ptr1 = front;
         int ptr2 = 0;
         while (ptr1 != last) {
             newarray[ptr2] = array[ptr1];
             ptr1 = plusOne(ptr1, length);
-            ptr2 = plusOne(ptr2, length / 2);
+            ptr2 = plusOne(ptr2, newlength);
         }
+        array = newarray;
+        length = newlength;
         front = 0;
         last = ptr2;
-        array = newarray;
-        length /= 2;
     }
 
     /** notice we set the "grow" condition with "size == length - 1"
@@ -63,7 +47,7 @@ public class ArrayDeque<T> {
     */
     public void addFirst(T item) {
         if (size == length - 1) {
-            grow();
+            resize(length * 2);
         }
         front = minusOne(front);
         array[front] = item;
@@ -72,7 +56,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == length - 1) {
-            grow();
+            resize(length * 2);
         }
         array[last] = item;
         last = plusOne(last, length);
@@ -100,12 +84,12 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        if (length >= 16 && length / size >= 4) {
-            shrink();
-        }
         T tmp = array[front];
         front = plusOne(front, length);
         size--;
+        if (length >= 16 && length / size >= 4) {
+            resize(length / 2);
+        }
         return tmp;
     }
 
@@ -113,12 +97,12 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        if (length >= 16 && length / size >= 4) {
-            shrink();
-        }
         last = minusOne(last);
         T tmp = array[last];
         size--;
+        if (length >= 16 && length / size >= 4) {
+            resize(length / 2);
+        }
         return tmp;
     }
 
