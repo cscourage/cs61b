@@ -1,9 +1,8 @@
 import java.util.Comparator;
-import java.util.function.DoublePredicate;
 
 public class DogLauncher {
     public static void main(String[] args) {
-        Dog d1 = new Dog("Doge",5);
+        Dog d1 = new Dog("Doge", 5);
         Dog d2 = new Dog("Grigometh", 200);
         Dog d3 = new Dog("Clifford", 9000);
         Dog[] dogs = new Dog[]{d1, d2, d3};

@@ -27,5 +27,7 @@ public class Dog implements Comparable<Dog> {
         return new NameComparator();
     }
 
-    /* for more compare ways, just add like above two code block. */
+    /** Since there's only room for one compareTo method, if we want
+     *  multiple ways to compare, we must turn to Comparator.
+     */
 }
