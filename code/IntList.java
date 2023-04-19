@@ -68,11 +68,26 @@ public class IntList {
 		}
 	}
 
+	public static IntList ilsans(IntList x, int y) {
+		if (x == null) {
+			return null;
+		}
+		if (x.first == y) {
+			return ilsans(x.rest, y);
+		}
+		return new IntList(x.first, ilsans(x.rest, y));
+	}
+
     public static void main(String[] args) {
-		IntList L = new IntList(15, null);
+		IntList L = new IntList(20, null);
+		L = new IntList(15, L);
 		L = new IntList(10, L);
 		L = new IntList(5, L);
+		IntList.ilsans(L, 10);
+		System.out.println(L.size());
+	}
 
+		/*
 		int len1 = L.size();
 		int len2 = L.iterativeSize();
 		int out = L.get(1);
@@ -94,4 +109,6 @@ public class IntList {
 		Ltt = new IntList(1, Ltt);
 		removeDuplicates(Ltt);
     }
+
+		 */
 }
