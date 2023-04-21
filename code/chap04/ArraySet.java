@@ -1,4 +1,7 @@
-public class ArraySet<T> {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ArraySet<T> implements Iterable<T> {
     private T[] items;
     private int size;
 
@@ -34,6 +37,38 @@ public class ArraySet<T> {
     /* Returns the number of key-value mappings in this map. */
     public int size() {
         return size;
+    }
+
+    public Iterator<T> iterator() {
+        return new ArraySetIterator();
+    }
+
+    private class ArraySetIterator implements Iterator<T> {
+        private int wizPos;
+        public ArraySetIterator() {
+            wizPos = 0;
+        }
+
+        public boolean hasNext() {
+            return wizPos < size;
+        }
+
+        public T next() {
+            T returnItem = items[wizPos];
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+
+    public String toString() {
+        StringBuilder returnSB = new StringBuilder("{");
+        for (int i = 0; i < size - 1; i += 1) {
+            returnSB.append(items[i].toString());
+            returnSB.append(",");
+        }
+        returnSB.append(items[size - 1]);
+        returnSB.append("}");
+        return returnSB.toString();
     }
 
     public static void main(String[] args) {
