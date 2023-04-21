@@ -3,7 +3,9 @@ package Map61B;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ArrayMap<K, V> implements Map61B<K, V> {
+import java.util.Iterator;
+
+public class ArrayMap<K, V> implements Map61B<K, V>, Iterable<K> {
     private K[] keys;
     private V[] values;
     private int size;
@@ -12,6 +14,32 @@ public class ArrayMap<K, V> implements Map61B<K, V> {
         keys = (K[]) new Object[100];
         values = (V[]) new Object[100];
         size = 0;
+    }
+
+    public Iterator<K> iterator() {
+        return new KeyIterator();
+        /*
+        List<K> keyList = keys();
+        return keyList.iterator();
+         */
+    }
+
+    private class KeyIterator implements Iterator<K> {
+        private int wizardPosition;
+
+        public KeyIterator() {
+            wizardPosition = 0;
+        }
+
+        public boolean hasNext() {
+            return wizardPosition < size;
+        }
+
+        public K next() {
+            K returnVal = keys[wizardPosition];
+            wizardPosition += 1;
+            return returnVal;
+        }
     }
 
     private int keyFinder(K key) {
@@ -38,8 +66,12 @@ public class ArrayMap<K, V> implements Map61B<K, V> {
         return keyFinder(key) > -1;
     }
 
+    /* notice A bug was intentionally created here. */
     public V get(K key) {
         int index = keyFinder(key);
+        if (index == -1) {
+            throw new IllegalArgumentException("key " + key + "doesn't exit in map.\n");
+        }
         return values[index];
     }
 
