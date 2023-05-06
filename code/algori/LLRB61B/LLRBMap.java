@@ -21,7 +21,9 @@ public class LLRBMap<Key extends Comparable<Key>, Value> {
     private static final boolean BLACK = false;
 
     private boolean isRed(Node h) {
-        if (h == null) return false;
+        if (h == null) {
+            return false;
+        }
         return h.color;
     }
 
@@ -30,8 +32,11 @@ public class LLRBMap<Key extends Comparable<Key>, Value> {
     }
 
     private int size(Node h) {
-        if (h == null) return 0;
-        else return h.N;
+        if (h == null) {
+            return 0;
+        } else {
+            return h.N;
+        }
     }
 
     private Node rotateLeft(Node h) {
@@ -75,15 +80,27 @@ public class LLRBMap<Key extends Comparable<Key>, Value> {
      *     If the left link and right link are both red, flip colors.
      */
     private Node put(Node h, Key key, Value value) {
-        if (h == null) return new Node(key, value, 1, RED);
+        if (h == null) {
+            return new Node(key, value, 1, RED);
+        }
         int cmp = key.compareTo(h.key);
-        if      (cmp < 0) h.left = put(h.left, key, value);
-        else if (cmp > 0) h.right = put(h.right, key, value);
-        else              h.value = value;
+        if (cmp < 0) {
+            h.left = put(h.left, key, value);
+        } else if (cmp > 0) {
+            h.right = put(h.right, key, value);
+        } else {
+            h.value = value;
+        }
 
-        if (isRed(h.right) && !isRed(h.left))    h = rotateLeft(h);
-        if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
-        if (isRed(h.left) && isRed(h.right))     flipColors(h);
+        if (isRed(h.right) && !isRed(h.left)) {
+            h = rotateLeft(h);
+        }
+        if (isRed(h.left) && isRed(h.left.left)) {
+            h = rotateRight(h);
+        }
+        if (isRed(h.left) && isRed(h.right)) {
+            flipColors(h);
+        }
 
         h.N = 1 + size(h.left) + size(h.right);
         return h;
@@ -96,13 +113,19 @@ public class LLRBMap<Key extends Comparable<Key>, Value> {
     /** 1. If the key is smaller than the current node's key, search node's left;
      *  2. Else if the key is bigger than the current node's key, search node's right;
      *  3. Else, we find it;
-     *  4. Node if the node if null, just return false;
+     *  4. Node if the node is null, just return false;
      */
     private boolean contains(Node h, Key key) {
-        if (h == null) return false;
+        if (h == null) {
+            return false;
+        }
         int cmp = key.compareTo(h.key);
-        if (cmp < 0)      return contains(h.left, key);
-        else if (cmp > 0) return contains(h.right, key);
-        else              return true;
+        if (cmp < 0) {
+            return contains(h.left, key);
+        } else if (cmp > 0) {
+            return contains(h.right, key);
+        } else {
+            return true;
+        }
     }
 }

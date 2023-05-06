@@ -22,5 +22,7 @@ public class TestLLRBMap {
         assertTrue(llrb.contains("egg"));
         assertTrue(llrb.contains("fetch"));
         assertTrue(llrb.contains("glue"));
+
+        assertEquals(7, llrb.size());
     }
 }
