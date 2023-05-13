@@ -350,5 +350,18 @@ public class BSTPrinceton<Key extends Comparable<Key>, Value> {
         }
     }
 
+    /* return the height of the BST. */
+    public int height() {
+        return height(root);
+    }
+
+    /* the helper method of height. */
+    private int height(Node x) {
+        if (x == null) {
+            return -1;
+        }
+        return 1 + Math.max(height(x.left), height(x.right));
+    }
+
 
 }
