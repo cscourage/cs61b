@@ -1,5 +1,6 @@
 package BST61B;
 
+import edu.princeton.cs.algs4.StdOut;
 import java.util.NoSuchElementException;
 
 public class BSTPrinceton<Key extends Comparable<Key>, Value> {
@@ -78,7 +79,7 @@ public class BSTPrinceton<Key extends Comparable<Key>, Value> {
         }
         if (value == null) {
             //delete(key);
-            return ;
+            return;
         }
         root = put(root, key, value);
         //assert check();
@@ -363,5 +364,71 @@ public class BSTPrinceton<Key extends Comparable<Key>, Value> {
         return 1 + Math.max(height(x.left), height(x.right));
     }
 
+    /* return the number of keys in the symbol table in the given range. */
+    public int size(Key lo, Key hi) {
+        if (lo == null) {
+            throw new IllegalArgumentException("first argument to size() is null.");
+        }
+        if (hi == null) {
+            throw new IllegalArgumentException("second argument to size() is null.");
+        }
+
+        if (lo.compareTo(hi) > 0) {
+            return 0;
+        }
+        if (contains(hi)) {
+            return rank(hi) - rank(lo) + 1;
+        } else {
+            return rank(hi) - rank(lo);
+        }
+    }
+
+    /** The following code is to check integrity of BST data structure.
+     */
+    public boolean check() {
+        if (!isBST()) {
+            StdOut.println("Not in symmetric order.");
+        }
+        if (!isSizeConsistent()) {
+            StdOut.println("Subtree counts not consistent.");
+        }
+        return isBST() && isSizeConsistent();
+    }
+
+    // does this binary tree satisfy symmetric order?
+    // Note: this test also ensures that data structure is a binary tree since order is strict.
+    private boolean isBST() {
+        return isBST(root, null, null);
+    }
+
+    /* the helper method of isBST. */
+    private boolean isBST(Node x, Key min, Key max) {
+        if (x == null) {
+            return true;
+        }
+        if (min != null && x.key.compareTo(min) <= 0) {
+            return false;
+        }
+        if (max != null && x.key.compareTo(max) >= 0) {
+            return false;
+        }
+        return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
+    }
+
+    // are the size fields correct?
+    private boolean isSizeConsistent() {
+        return isSizeConsistent(root);
+    }
+
+    /* the helper method of isSizeConsistent. */
+    private boolean isSizeConsistent(Node x) {
+        if (x == null) {
+            return true;
+        }
+        if (x.size != size(x.left) + size(x.right) + 1) {
+            return false;
+        }
+        return isSizeConsistent(x.left) && isSizeConsistent(x.right);
+    }
 
 }

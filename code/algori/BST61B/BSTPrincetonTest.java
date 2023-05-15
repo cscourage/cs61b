@@ -49,6 +49,11 @@ public class BSTPrincetonTest {
 
         assertEquals(3, bst.height());
 
-        System.out.println(bst.rank("i"));
+        assertEquals(4, bst.rank("i"));
+
+        assertEquals(6, bst.size("cat", "less"));
+        assertEquals(4, bst.size("cow", "lay"));
+
+        assertTrue(bst.check());
     }
 }
