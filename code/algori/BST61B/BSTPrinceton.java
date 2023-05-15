@@ -78,11 +78,11 @@ public class BSTPrinceton<Key extends Comparable<Key>, Value> {
             throw new IllegalArgumentException("calls put() with a null key.");
         }
         if (value == null) {
-            //delete(key);
+            delete(key);
             return;
         }
         root = put(root, key, value);
-        //assert check();
+        assert check();
     }
 
     /* the helper method of put. */
@@ -108,7 +108,7 @@ public class BSTPrinceton<Key extends Comparable<Key>, Value> {
             throw new NoSuchElementException("Symbol table underflow.");
         }
         root = deleteMin(root);
-        //assert check();
+        assert check();
     }
 
     /* the helper method of deleteMin. */
@@ -127,7 +127,7 @@ public class BSTPrinceton<Key extends Comparable<Key>, Value> {
             throw new NoSuchElementException("Symbol table underflow.");
         }
         root = deleteMax(root);
-        //assert check();
+        assert check();
     }
 
     private Node deleteMax(Node x) {
@@ -145,7 +145,7 @@ public class BSTPrinceton<Key extends Comparable<Key>, Value> {
             throw new IllegalArgumentException("calls delete() with a null key.");
         }
         root = delete(root, key);
-        //assert check();
+        assert check();
     }
 
     /* the helper method of delete. */
