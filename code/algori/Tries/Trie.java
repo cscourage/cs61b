@@ -9,4 +9,5 @@ public interface Trie<Value> {
     public Iterable<String> keysWithPrefix(String pre);
     public Iterable<String> keysThatMatch(String pat);
     public String longestPrefixOf(String s);
+    public void delete(String key);
 }

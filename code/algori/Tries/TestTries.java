@@ -65,4 +65,18 @@ public class TestTries {
         assertEquals("she", tr.longestPrefixOf("shelters"));
     }
 
+    @Test
+    public void testDelete() {
+        Trie<Integer> tr = new TrieST<>();
+        tr.put("sea", 2);
+        tr.put("sells", 1);
+        tr.put("she", 0);
+        tr.put("shells", 3);
+        tr.delete("shells");
+        assertFalse(tr.contains("shells"));
+        assertTrue(tr.contains("sea"));
+        assertTrue(tr.contains("she"));
+        assertTrue(tr.contains("sells"));
+    }
+
 }
