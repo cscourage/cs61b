@@ -7,4 +7,5 @@ public interface Trie<Value> {
     public void put(String key, Value val);
     public Iterable<String> keys();
     public Iterable<String> keysWithPrefix(String pre);
+    public Iterable<String> keysThatMatch(String pat);
 }

@@ -119,4 +119,33 @@ public class TrieST<Value> implements Trie<Value> {
             collect(x.next[c], pre + c, q);
         }
     }
+
+    @Override
+    public Iterable<String> keysThatMatch(String pat) {
+        Queue<String> q = new Queue<>();
+        collect(root, "", pat, q);
+        return q;
+    }
+
+    private void collect(Node x, String pre, String pat, Queue<String> q) {
+        int d = pre.length();
+        // if fall out of the tree.
+        if (x == null) {
+            return;
+        }
+        // upon reaching the length, it ends.
+        // if x.val != null, append the String pre.
+        if (d == pat.length()) {
+            if (x.val != null) {
+                q.enqueue(pre);
+            }
+            return;
+        }
+        char next = pat.charAt(d);
+        for (char c = 0; c < R; c++) {
+            if (next == '.' || next == c) {
+                collect(x.next[c], pre + c, pat, q);
+            }
+        }
+    }
 }
