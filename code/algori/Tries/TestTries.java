@@ -23,4 +23,18 @@ public class TestTries {
         assertTrue(tr.contains("the"));
         assertFalse(tr.contains("shout"));
     }
+
+    @Test
+    public void testStringOperation() {
+        Trie<Integer> tr = new TrieST<>();
+        tr.put("by", 4);
+        tr.put("sea", 6);
+        tr.put("sells", 1);
+        tr.put("she", 0);
+        tr.put("shells", 3);
+        tr.put("shore", 7);
+        tr.put("the", 5);
+        System.out.println(tr.keys());
+        System.out.println(tr.keysWithPrefix("sh"));
+    }
 }

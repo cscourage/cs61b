@@ -1,5 +1,7 @@
 package Tries;
 
+import edu.princeton.cs.algs4.Queue;
+
 public class TrieST<Value> implements Trie<Value> {
     private static final int R = 128;
     private Node root;
@@ -88,9 +90,33 @@ public class TrieST<Value> implements Trie<Value> {
         if (x.val != null) {
             cnt += 1;
         }
-        for (char c = 0; c < R; c ++) {
+        for (char c = 0; c < R; c++) {
             cnt += size_recursion_helper(x.next[c]);
         }
         return cnt;
+    }
+
+    @Override
+    public Iterable<String> keys() {
+        return keysWithPrefix("");
+    }
+
+    @Override
+    public Iterable<String> keysWithPrefix(String pre) {
+        Queue<String> q = new Queue<>();
+        collect(get(root, pre, 0), pre, q);
+        return q;
+    }
+
+    private void collect(Node x, String pre, Queue<String> q) {
+        if (x == null) {
+            return;
+        }
+        if (x.val != null) {
+            q.enqueue(pre);
+        }
+        for (char c = 0; c < R; c++) {
+            collect(x.next[c], pre + c, q);
+        }
     }
 }
