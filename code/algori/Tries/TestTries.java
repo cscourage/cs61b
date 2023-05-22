@@ -19,6 +19,7 @@ public class TestTries {
         assertEquals(6, (int) tr.get("sea"));
         tr.put("shore", 7);
         assertEquals(7, tr.size());
+        assertEquals(7, ((TrieST) tr).size_recursion());
         assertTrue(tr.contains("the"));
         assertFalse(tr.contains("shout"));
     }

@@ -74,4 +74,23 @@ public class TrieST<Value> implements Trie<Value> {
         x.next[c] = put(x.next[c], key, val, d + 1);
         return x;
     }
+
+    public int size_recursion() {
+        return size_recursion_helper(root);
+    }
+
+    private int size_recursion_helper(Node x) {
+        // Base case.
+        if (x == null) {
+            return 0;
+        }
+        int cnt = 0;
+        if (x.val != null) {
+            cnt += 1;
+        }
+        for (char c = 0; c < R; c ++) {
+            cnt += size_recursion_helper(x.next[c]);
+        }
+        return cnt;
+    }
 }
