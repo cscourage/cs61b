@@ -148,4 +148,27 @@ public class TrieST<Value> implements Trie<Value> {
             }
         }
     }
+
+    @Override
+    public String longestPrefixOf(String s) {
+        int length = search(root, s, 0, 0);
+        return s.substring(0, length);
+    }
+
+    private int search(Node x, String s, int d, int length) {
+        // fall out of the tree.
+        if (x == null) {
+            return length;
+        }
+        // If reach a key then set the length.It ensures the longest.
+        if (x.val != null) {
+            length = d;
+        }
+        // reach the length.
+        if (d == s.length()) {
+            return length;
+        }
+        char c = s.charAt(d);
+        return search(x.next[c], s, d + 1, length);
+    }
 }

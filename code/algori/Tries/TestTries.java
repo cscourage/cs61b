@@ -51,4 +51,18 @@ public class TestTries {
         System.out.println(tr.keysThatMatch(".he"));
         System.out.println(tr.keysThatMatch("s.."));
     }
+
+    @Test
+    public void testLongestPrefixOf() {
+        Trie<Integer> tr = new TrieST<>();
+        tr.put("sea", 2);
+        tr.put("sells", 1);
+        tr.put("she", 0);
+        tr.put("shells", 3);
+        assertEquals("she", tr.longestPrefixOf("she"));
+        assertEquals("she", tr.longestPrefixOf("shell"));
+        assertEquals("shells", tr.longestPrefixOf("shellsort"));
+        assertEquals("she", tr.longestPrefixOf("shelters"));
+    }
+
 }
