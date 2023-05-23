@@ -174,6 +174,9 @@ public class TrieST<Value> implements Trie<Value> {
 
     @Override
     public void delete(String key) {
+        if (root != null) {
+            size -= 1;
+        }
         root = delete(root, key, 0);
     }
 

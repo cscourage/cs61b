@@ -72,7 +72,9 @@ public class TestTries {
         tr.put("sells", 1);
         tr.put("she", 0);
         tr.put("shells", 3);
+        assertEquals(4, tr.size());
         tr.delete("shells");
+        assertEquals(3, tr.size());
         assertFalse(tr.contains("shells"));
         assertTrue(tr.contains("sea"));
         assertTrue(tr.contains("she"));
