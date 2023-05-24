@@ -2,8 +2,8 @@ package HashTable;
 
 import java.util.ArrayList;
 
-public class SeparateChainingHashST<Key, Value> {
-    private static final int Init_Capacity = 4;
+public class SeparateChainingHashST<Key, Value> implements Hash<Key, Value> {
+    private static final int INIT_CAPACITY = 4;
     private int M;   //the number of buckets.
     private int N;   //the number of key-value pairs.
     private ArrayList<ST>[] buckets;  //the buckets which based on arraylist.
@@ -40,7 +40,7 @@ public class SeparateChainingHashST<Key, Value> {
     }
 
     public SeparateChainingHashST() {
-        this(Init_Capacity);
+        this(INIT_CAPACITY);
     }
 
     public SeparateChainingHashST(int capacity) {
@@ -52,10 +52,12 @@ public class SeparateChainingHashST<Key, Value> {
         }
     }
 
+    @Override
     public int elementSize() {
         return N;
     }
 
+    @Override
     public int bucketsSize() {
         return M;
     }
@@ -75,6 +77,7 @@ public class SeparateChainingHashST<Key, Value> {
         this.buckets = newHashTable.buckets;
     }
 
+    @Override
     /* put the key-value pair into the SeparateChainingHashTable. */
     public void put(Key key, Value value) {
         if ((double) N / M >= 1.5) {
@@ -102,6 +105,7 @@ public class SeparateChainingHashST<Key, Value> {
         return (key.hashCode() & 0x7fffffff) % M;
     }
 
+    @Override
     public boolean contains(Key key) {
         int index = hash(key);
         ArrayList<ST> target = buckets[index];
@@ -113,6 +117,7 @@ public class SeparateChainingHashST<Key, Value> {
         return false;
     }
 
+    @Override
     public void delete(Key key) {
         int index = hash(key);
         ArrayList<ST> target = buckets[index];
@@ -130,11 +135,12 @@ public class SeparateChainingHashST<Key, Value> {
         }
         N -= 1;
         /* resize. */
-        if (M > Init_Capacity && (double) N / M <= 0.5) {
+        if (M > INIT_CAPACITY && (double) N / M <= 0.5) {
             resize(M / 2);
         }
     }
 
+    @Override
     public Value get(Key key) {
         int index = hash(key);
         ArrayList<ST> target = buckets[index];

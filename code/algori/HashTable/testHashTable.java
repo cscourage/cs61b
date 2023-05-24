@@ -7,7 +7,7 @@ public class testHashTable {
     /* incrementally add test. */
     @Test
     public void testSeparateChainingHashTable() {
-        SeparateChainingHashST<String, Integer> hashTable = new SeparateChainingHashST<>();
+        Hash<String, Integer> hashTable = new SeparateChainingHashST<>();
         hashTable.put("josh", 100);
         hashTable.put("hug", 90);
         hashTable.put("Tyrone", 94);
@@ -36,8 +36,31 @@ public class testHashTable {
 
     @Test
     public void testLinearProbingHashTable() {
-        LinearProbingHashST<String, Integer> hashTable = new LinearProbingHashST<>();
+        Hash<String, Integer> hashTable = new LinearProbingHashST<>();
         hashTable.put("josh", 100);
         hashTable.put("hug", 90);
+        assertEquals(2, hashTable.elementSize());
+        assertEquals(4, hashTable.bucketsSize());
+        hashTable.put("alice", 10);
+        assertEquals(3, hashTable.elementSize());
+        assertEquals(8, hashTable.bucketsSize());
+
+        assertTrue(hashTable.contains("hug"));
+        assertFalse(hashTable.contains("bob"));
+
+        hashTable.put("Tyrone", 94);
+        hashTable.put("bob", 20);
+        assertEquals(5, hashTable.elementSize());
+        assertEquals(16, hashTable.bucketsSize());
+
+        assertEquals(94, (int) hashTable.get("Tyrone"));
+        hashTable.delete("josh");
+        hashTable.delete("bob");
+        hashTable.delete("alice");
+        assertEquals(2, hashTable.elementSize());
+        assertEquals(8, hashTable.bucketsSize());
+        hashTable.delete("Tyrone");
+        assertEquals(1, hashTable.elementSize());
+        assertEquals(4, hashTable.bucketsSize());
     }
 }
