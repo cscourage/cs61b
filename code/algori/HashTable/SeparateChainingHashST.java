@@ -102,4 +102,15 @@ public class SeparateChainingHashST<Key, Value> {
         return (key.hashCode() & 0x7fffffff) % M;
     }
 
+    public boolean contains(Key key) {
+        int index = hash(key);
+        ArrayList<ST> target = buckets[index];
+        for (int i = 0; i < target.size(); i += 1) {
+            if (key.equals(target.get(i).key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

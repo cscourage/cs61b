@@ -18,5 +18,8 @@ public class testHashTable {
         hashTable.put("hug", 91);
         assertEquals(6, hashTable.elementSize());
         assertEquals(8, hashTable.bucketsSize());
+
+        assertTrue(hashTable.contains("Tyrone"));
+        assertFalse(hashTable.contains("alin"));
     }
 }
