@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class testHashTable {
+    /* incrementally add test. */
     @Test
     public void testSeparateChainingHashTable() {
         SeparateChainingHashST<String, Integer> hashTable = new SeparateChainingHashST<>();
@@ -21,5 +22,15 @@ public class testHashTable {
 
         assertTrue(hashTable.contains("Tyrone"));
         assertFalse(hashTable.contains("alin"));
+
+        hashTable.delete("hug");
+        assertEquals(5, hashTable.elementSize());
+        assertEquals(8, hashTable.bucketsSize());
+
+        hashTable.delete("alice");
+        assertEquals(4, hashTable.elementSize());
+        assertEquals(4, hashTable.bucketsSize());
+
+        assertEquals(100, (int) hashTable.get("josh"));
     }
 }

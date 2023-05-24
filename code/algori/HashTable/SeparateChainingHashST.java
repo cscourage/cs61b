@@ -105,12 +105,45 @@ public class SeparateChainingHashST<Key, Value> {
     public boolean contains(Key key) {
         int index = hash(key);
         ArrayList<ST> target = buckets[index];
-        for (int i = 0; i < target.size(); i += 1) {
-            if (key.equals(target.get(i).key)) {
+        for (ST st : target) {
+            if (key.equals(st.key)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public void delete(Key key) {
+        int index = hash(key);
+        ArrayList<ST> target = buckets[index];
+        int pos = -1;
+        for (int i = 0; i < target.size(); i += 1) {
+            if (key.equals(target.get(i).key)) {
+                pos = i;
+                break;
+            }
+        }
+        if (pos == -1) {
+            throw new IllegalArgumentException("hashTable doesn't have the given key.");
+        } else {
+            target.remove(pos);
+        }
+        N -= 1;
+        /* resize. */
+        if (M > Init_Capacity && (double) N / M <= 0.5) {
+            resize(M / 2);
+        }
+    }
+
+    public Value get(Key key) {
+        int index = hash(key);
+        ArrayList<ST> target = buckets[index];
+        for (ST st : target) {
+            if (key.equals(st.key)) {
+                return st.value;
+            }
+        }
+        throw new IllegalArgumentException("HashTable doesn't have the key");
     }
 
 }
