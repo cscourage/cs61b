@@ -33,4 +33,11 @@ public class testHashTable {
 
         assertEquals(100, (int) hashTable.get("josh"));
     }
+
+    @Test
+    public void testLinearProbingHashTable() {
+        LinearProbingHashST<String, Integer> hashTable = new LinearProbingHashST<>();
+        hashTable.put("josh", 100);
+        hashTable.put("hug", 90);
+    }
 }
