@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private int N;
     private WeightedQuickUnionUF sites;
+    private WeightedQuickUnionUF sitesAvoidBackWash;
     private int topVirtualSite;
     private int bottomVirtualSite;
     private boolean[][] flags; // true stands for "open", vice verse.
@@ -23,11 +24,13 @@ public class Percolation {
 
         flags = new boolean[N][N];
         sites = new WeightedQuickUnionUF(N * N + 2);
+        sitesAvoidBackWash = new WeightedQuickUnionUF(N * N + 1);
         // the reason why I don't put the two below into the same for loop is that
         // it might spoil the array's spatial locality. But I don't verify it.
         // and if you want to speed up, you can also use loop unrolling.
         for (int i = 0; i < N; i += 1) {
             sites.union(topVirtualSite, locationTo1D(0, i));
+            sitesAvoidBackWash.union(topVirtualSite, locationTo1D(0, i));
         }
         for (int i = 0; i < N; i += 1) {
             sites.union(bottomVirtualSite, locationTo1D(N - 1, i));
@@ -43,7 +46,7 @@ public class Percolation {
         return x * N + y;
     }
 
-    // open the site (row, col) if it is not open already
+    // open the site (row, col) if it is not open already.
     public void open(int row, int col) {
         validRange(row, col);
         if (flags[row][col]) {
@@ -63,6 +66,7 @@ public class Percolation {
         }
         if (flags[neighborRow][neighborCol]) {
             sites.union(locationTo1D(row, col), locationTo1D(neighborRow, neighborCol));
+            sitesAvoidBackWash.union(locationTo1D(row, col), locationTo1D(neighborRow, neighborCol));
         }
     }
 
@@ -79,7 +83,7 @@ public class Percolation {
         if (!flags[row][col]) {
             return false;
         }
-        return sites.connected(locationTo1D(row, col), topVirtualSite);
+        return sitesAvoidBackWash.connected(locationTo1D(row, col), topVirtualSite);
     }
 
     // number of open sites
