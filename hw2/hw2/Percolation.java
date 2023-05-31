@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private int N;
     private WeightedQuickUnionUF sites;
-    private WeightedQuickUnionUF sitesAvoid;
+    private WeightedQuickUnionUF sitesAvoid;  // used for avoiding backwash.
     private int topVirtualSite;
     private int bottomVirtualSite;
     private boolean[][] flags; // true stands for "open", vice verse.
@@ -93,6 +93,9 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
+        // notice it mustn't be deleted, because when N = 1, and we don't open
+        // the only item, so it will not percolate. But if we remove it, it will
+        // percolate, which results an error.
         if (numOpen == 0) {
             return false;
         }
