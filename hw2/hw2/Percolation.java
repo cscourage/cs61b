@@ -58,7 +58,9 @@ public class Percolation {
     }
 
     private void connectNeighbor(int row, int col, int neighborRow, int neighborCol) {
-        validRange(neighborRow, neighborCol);
+        if (neighborRow < 0 || neighborRow >= N || neighborCol < 0 || neighborCol >= N) {
+            return;
+        }
         if (flags[neighborRow][neighborCol]) {
             sites.union(locationTo1D(row, col), locationTo1D(neighborRow, neighborCol));
         }
