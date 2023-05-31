@@ -14,7 +14,7 @@ public class PercolationStats {
         }
         this.T = T;
         fractions = new double[T];
-        for (int i = 0; i < N; i += 1) {
+        for (int i = 0; i < T; i += 1) {
             Percolation percolation = pf.make(N);
             while (!percolation.percolates()) {
                 int row, col;
@@ -46,5 +46,11 @@ public class PercolationStats {
     // high endpoint of 95% confidence interval
     public double confidenceHigh() {
         return mean() + 1.96 * stddev() / Math.sqrt(T);
+    }
+
+    public static void main(String[] args) {
+        PercolationStats ps = new PercolationStats(20, 10, new PercolationFactory());
+        System.out.println(ps.mean());
+        System.out.println(ps.stddev());
     }
 }
