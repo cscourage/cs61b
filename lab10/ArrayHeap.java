@@ -235,6 +235,13 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         contents[index].myPriority = priority;
         swim(index);
         sink(index);
+        /** the above is not so explainable. You can think that:
+        * if (prePriority < priority) {
+        *     sink(index);
+        * } else {
+        *     swim(index);
+        * }
+         */
     }
 
     /**
