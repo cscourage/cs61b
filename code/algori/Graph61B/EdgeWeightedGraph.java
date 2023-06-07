@@ -17,10 +17,14 @@ public class EdgeWeightedGraph {
         }
     }
 
-    public void addEdge(int v, int w, double weight) {
+    /** for directed graph, what we will to do is only add the specific one in the adj not the two both.
+     *  tag true for directed graph, false for undirected graph. */
+    public void addEdge(int v, int w, double weight, boolean tag) {
         Edge edge = new Edge(v, w, weight);
         adj[v].add(edge);
-        adj[w].add(edge);
+        if (!tag) {
+            adj[w].add(edge);
+        }
         E += 1;
     }
 
