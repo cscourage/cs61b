@@ -39,4 +39,14 @@ public class EdgeWeightedGraph {
     public int E() {
         return E;
     }
+
+    public Iterable<Edge> edges() {
+        List<Edge> edgeList = new ArrayList<>();
+        for (int v = 0; v < V; v += 1) {
+            for (Edge e : adj(v)) {
+                edgeList.add(e);
+            }
+        }
+        return edgeList;
+    }
 }

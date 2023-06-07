@@ -54,7 +54,7 @@ public class PrimMST {
 
     public void path() {
         for (int v = 0; v < distTo.length; v += 1) {
-            System.out.println(edgeTo[v] + "->" + v);
+            System.out.println(edgeTo[v] + "-" + v);
         }
     }
 

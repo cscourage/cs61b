@@ -1,6 +1,6 @@
 package Graph61B;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
     private final int v;
     private final int w;
     private final double weight;
