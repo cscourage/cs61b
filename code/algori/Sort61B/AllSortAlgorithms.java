@@ -1,5 +1,6 @@
 package Sort61B;
 
+/** Notice: we use the big O representation for tight bounds. */
 
 public class AllSortAlgorithms {
     /** The below is selectionSort part.
@@ -28,10 +29,10 @@ public class AllSortAlgorithms {
         return smallestIndex;
     }
 
-    private static void swap(int[] a, int start, int smallestIndex) {
-        int temp = a[start];
-        a[start] = a[smallestIndex];
-        a[smallestIndex] = temp;
+    private static void swap(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 
     /** If we use iteration for selection sort, the time complexity is still O(N^2),
@@ -97,6 +98,26 @@ public class AllSortAlgorithms {
                 j -= 1;
             }
             a[j] = temp;
+        }
+    }
+
+    /** The below is shellSort part. It may be unstable. The space complexity is O(1).
+     *  The best time complexity is O(N), worst time complexity is omega(NlogN) and O(?)
+     *  depends on the sequence you choose. The sequence we choose here is using the
+     *  princeton's example 1/2*(3^k-1). It is good enough for normal conditions. */
+    public static void shellSort(int[] a) {
+        int N = a.length;
+        int h = 1;
+        while (h < N / 3) {
+            h = 3 * h + 1;
+        }
+        while (h >= 1) {
+            for (int i = h; i < N; i += 1) {
+                for (int j = i; j >= h && a[j] < a[j - h]; j -= h) {
+                    swap(a, j, j - h);
+                }
+            }
+            h /= 3;
         }
     }
 }
