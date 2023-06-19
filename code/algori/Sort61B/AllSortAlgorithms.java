@@ -48,7 +48,7 @@ public class AllSortAlgorithms {
     /** The below is mergeSort part. You can also use stack and iteration for mergeSort,
      *  and maybe it is good for parallelism. But it is beyond the class's scope.
      *  For recursion implementation, the time complexity is O(NlogN), and the
-     *  space complexity is O(logN). It is also stable. */
+     *  space complexity is O(N). It is also stable. */
     public static void mergeSort(int[] a) {
         mergeSortHelper(a, 0, a.length - 1);
     }
