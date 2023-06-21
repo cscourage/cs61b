@@ -16,7 +16,8 @@ public class SortTest {
         //AllSortAlgorithms.selectionSortIteration(a);
         //AllSortAlgorithms.mergeSort(a);
         //AllSortAlgorithms.insertionSort(a);
-        AllSortAlgorithms.shellSort(a);
+        //AllSortAlgorithms.shellSort(a);
+        AllSortAlgorithms.quickSort(a);
         StringBuilder end = new StringBuilder();
         for (int j : a) {
             end.append(j).append(" ");
