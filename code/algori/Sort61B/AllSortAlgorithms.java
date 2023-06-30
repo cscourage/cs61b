@@ -1,5 +1,8 @@
 package Sort61B;
 
+import java.util.Random;
+
+
 /** Notice: we use the big O representation for tight bounds. */
 
 public class AllSortAlgorithms {
@@ -48,7 +51,7 @@ public class AllSortAlgorithms {
     /** The below is mergeSort part. You can also use stack and iteration for mergeSort,
      *  and maybe it is good for parallelism. But it is beyond the class's scope.
      *  For recursion implementation, the time complexity is O(NlogN), and the
-     *  space complexity is O(logN). It is also stable. */
+     *  space complexity is O(N). It is also stable. */
     public static void mergeSort(int[] a) {
         mergeSortHelper(a, 0, a.length - 1);
     }
@@ -118,6 +121,62 @@ public class AllSortAlgorithms {
                 }
             }
             h /= 3;
+        }
+    }
+
+    /** The below is quickSort part. We shuffle the array, pick the leftmost item as pivot, and
+     *  use Tony Hoare's partioning(not the same, just the liked method, which is inspired by my
+     *  school's data structure class) to avoid the worst case and accelerate the method. Its time
+     *  complexity is O(NlogN) in average and has only little probability in O(N^2) and space
+     *  complexity is O(logN) for extra recursive stacks. It is unstable because the shuffling
+     *  and partioning strategy. */
+    public static void quickSort(int[] a) {
+        shuffle(a);
+        quickSortHelper(a, 0, a.length - 1);
+    }
+
+    private static void quickSortHelper(int[] a, int low, int high) {
+        int i = low, j = high;
+
+        if (low >= high) {
+            return;
+        }
+
+        int pivot = a[i];
+        /* while the tow pointer don't encounter, just get into loop. */
+        while (i < j) {
+            /* from j to i until find an item less than or equal to pivot.*/
+            while (i < j && pivot < a[j]) {
+                j -= 1;
+            }
+            /* replace and update i to add 1. */
+            if (i < j) {
+                a[i] = a[j];
+                i += 1;
+            }
+            /* then from i to j until find an item larger than pivot. */
+            while (i < j && a[i] <= pivot) {
+                i += 1;
+            }
+            /* replace and update j to minus 1. */
+            if (i < j) {
+                a[j] = a[i];
+                j -= 1;
+            }
+        }
+        a[i] = pivot;
+        quickSortHelper(a, low, j - 1);
+        quickSortHelper(a, i + 1, high);
+    }
+
+    /** I ask the chatGPT and he tells me the Fisher–Yates shuffling, i.e. Knuth shuffling. */
+    private static void shuffle(int[] a) {
+        Random rand = new Random();
+        for (int i = a.length - 1; i >= 0; i -= 1) {
+            int j = rand.nextInt(i + 1);
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
         }
     }
 }
