@@ -231,9 +231,4 @@ public class AllSortAlgorithms {
             System.arraycopy(aux, 0, a, 0, N);
         }
     }
-
-    /** MSD. copied and revised by princeton. */
-    public static void MSDSort() {
-
-    }
 }
