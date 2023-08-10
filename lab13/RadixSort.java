@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Class for doing Radix sort
  *
@@ -17,7 +19,17 @@ public class RadixSort {
      */
     public static String[] sort(String[] asciis) {
         // TODO: Implement LSD Sort
-        return null;
+        int longest = 0;
+        String[] retSorted = new String[asciis.length];
+        for (int i = 0; i < asciis.length; i += 1) {
+            String temp = asciis[i];
+            retSorted[i] = temp;
+            longest = temp.length() > longest ? temp.length() : longest;
+        }
+        for (int i = longest - 1; i >= 0; i -= 1) {
+            sortHelperLSD(retSorted, i);
+        }
+        return retSorted;
     }
 
     /**
@@ -28,7 +40,34 @@ public class RadixSort {
      */
     private static void sortHelperLSD(String[] asciis, int index) {
         // Optional LSD helper method for required LSD radix sort
-        return;
+        int[] counts = new int[257];
+        for (String s : asciis) {
+            if (s.length() <= index) {
+                counts[0]++;
+            } else {
+                counts[(int) s.charAt(index) + 1]++;
+            }
+        }
+
+        int[] starts = new int[257];
+        int temp = 0, k = 0;
+        for (int count : counts) {
+            starts[k++] = temp;
+            temp += count;
+        }
+
+        String[] sorted = new String[asciis.length];
+        for (String item : asciis) {
+            int id = item.length() <= index ? 0 : (int) item.charAt(index) + 1;
+            int place = starts[id];
+            sorted[place] = item;
+            starts[id] += 1;
+        }
+
+        for (int i = 0; i < asciis.length; i += 1) {
+            asciis[i] = sorted[i];
+        }
+
     }
 
     /**
@@ -44,5 +83,11 @@ public class RadixSort {
     private static void sortHelperMSD(String[] asciis, int start, int end, int index) {
         // Optional MSD helper method for optional MSD radix sort
         return;
+    }
+
+    public static void main(String[] args) {
+        String[] myTest = {"balala", "alisa", "oh"};
+        String[] sorted = sort(myTest);
+        System.out.println(Arrays.toString(sorted));
     }
 }
