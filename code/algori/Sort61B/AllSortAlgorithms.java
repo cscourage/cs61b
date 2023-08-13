@@ -143,13 +143,13 @@ public class AllSortAlgorithms {
         }
 
         int pivot = a[i];
-        /* while the tow pointer don't encounter, just get into loop. */
+        /* while the two pointer don't encounter, just get into loop. */
         while (i < j) {
             /* from j to i until find an item less than or equal to pivot.*/
             while (i < j && pivot < a[j]) {
                 j -= 1;
             }
-            /* replace and update i to add 1. */
+            /* override a[i] with a[j] and i plus 1. */
             if (i < j) {
                 a[i] = a[j];
                 i += 1;
@@ -158,7 +158,7 @@ public class AllSortAlgorithms {
             while (i < j && a[i] <= pivot) {
                 i += 1;
             }
-            /* replace and update j to minus 1. */
+            /* override a[j] with a[i] and j minus 1. */
             if (i < j) {
                 a[j] = a[i];
                 j -= 1;
