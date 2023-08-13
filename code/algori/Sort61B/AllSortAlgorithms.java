@@ -125,11 +125,11 @@ public class AllSortAlgorithms {
     }
 
     /** The below is quickSort part. We shuffle the array, pick the leftmost item as pivot, and
-     *  use Tony Hoare's partioning(not the same, just the liked method, which is inspired by my
+     *  use Tony Hoare's partitioning(not the same, just the liked method, which is inspired by my
      *  school's data structure class) to avoid the worst case and accelerate the method. Its time
      *  complexity is O(NlogN) in average and has only little probability in O(N^2) and space
      *  complexity is O(logN) for extra recursive stacks. It is unstable because the shuffling
-     *  and partioning strategy. */
+     *  and partitioning strategy. */
     public static void quickSort(int[] a) {
         shuffle(a);
         quickSortHelper(a, 0, a.length - 1);
@@ -177,6 +177,58 @@ public class AllSortAlgorithms {
             int temp = a[i];
             a[i] = a[j];
             a[j] = temp;
+        }
+    }
+
+    /** The below is counting sort. Its time complexity is O(N+R) and space complexity is also
+     * O(N+R). Notice that N is the key size and R is the alphabet size. If N >= R, then we
+     * expected a reasonable performance. But it has some restriction that no obvious way to
+     * sort hard-to-count things like Strings. And it is stable. */
+    public static void countingSort(int[] a, int N, int R) {
+        // create and initialize the counts.
+        int[] counts = new int[R];
+        for (int element : a) {
+            counts[element] += 1;
+        }
+        // create and initialize the starting points.
+        int[] startingPoint = new int[R];
+        int temp = 0, i = 0;
+        for (int element : counts) {
+            startingPoint[i] = temp;
+            temp += element;
+            i += 1;
+        }
+        // N times: check and update target position.
+        int[] sorted = new int[N];
+        for (int element : a) {
+            sorted[startingPoint[element]] = element;
+            startingPoint[element] += 1;
+        }
+        // copy back.
+        System.arraycopy(sorted, 0, a, 0, N);
+    }
+
+    /** LSD. copied and revised by princeton. */
+    public static void LSDSort(String[] a, int W) {
+        int N = a.length;
+        int R = 256;
+        String[] aux = new String[N];
+        for (int d = W - 1; d >= 0; d--) {
+            // create and initialize the counts.
+            int[] count = new int[R + 1];
+            for (String s : a) {
+                count[s.charAt(d) + 1] += 1;
+            }
+            // transform counts to indices.
+            for (int r = 0; r < R; r++) {
+                count[r + 1] += count[r];
+            }
+            // Distribute.
+            for (String s : a) {
+                aux[count[s.charAt(d)]++] = s;
+            }
+            // copy back.
+            System.arraycopy(aux, 0, a, 0, N);
         }
     }
 }

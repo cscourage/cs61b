@@ -86,6 +86,35 @@ public class TestBSTMap {
         assertTrue(b.get("hi") != null);
     }
 
+    /** The below test "KeySet()", and two "remove" methods.
+     *  @author added by cscourage.
+     */
+
+    @Test
+    public void testByCourage() {
+        BSTMap<String, Integer> bst = new BSTMap<>();
+        bst.put("josh", 90);
+        bst.put("egg", 50);
+        bst.put("nature", 100);
+        bst.put("apple", 10);
+        bst.put("flyingPig", 20);
+        bst.put("kernel", 60);
+        bst.put("oop", 18);
+        System.out.println(bst.keySet());
+
+        // the "egg-50" pair has been removed.
+        assertEquals(50, (int) bst.remove("egg"));
+        assertEquals(6, bst.size());
+        assertFalse(bst.containsKey("egg"));
+        System.out.println(bst.keySet());
+
+        // the "josh-0" pair haven't been removed.
+        assertEquals(null, bst.remove("josh", 0));
+        assertEquals(6, bst.size());
+        assertTrue(bst.containsKey("josh"));
+        System.out.println(bst.keySet());
+    }
+
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestBSTMap.class);
     }
