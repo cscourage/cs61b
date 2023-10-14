@@ -27,7 +27,9 @@ cs61b作为UCBerkeley的数据结构与算法课程，全面地讲述了各种�
 本仓库中分为两个分支，一个是master，另一个是hug61b。master包含实现的作业，hug61b包含课上跟着demo的代码，以及各种数据结构自己写的实现，放在code/algori下（这个课上是没有教具体代码实现的，留给了我们学生自己去实现，虽然Princeton的algs4中有所有的实现，因为Josh Hug之前是在Princeton工作的，后面来了UCBerkeley，但是有些细节以及处理方式还是和algs4中的代码不一样，所以还是在参考algs4的情况下自己再实现是最好的，这样也可以加深理解）
 
 对于作业部分，本仓库完成了lab1、lab2、lab3、lab9、lab10、lab11、lab12、lab13、lab14、hw1、hw2、hw3、project0、project1，且均满分通过，其余的小部分作业由于时间和学校本身的work load关系未继续完成。
-![image](https://github.com/cscourage/cs61b/assets/110170603/4adf0723-8281-4bf5-8263-4fc350cd04b0)
+
+![image](https://github.com/cscourage/cs61b/assets/110170603/c21b16a3-5818-4fad-a3b1-0b1fa9e9b3c5)
+
 
 ## 后续进阶
 如果学完这门课就把它放到一边了，那么其中的很多内容在一段时间之后还是会忘记的，所以个人建议有兴趣的话再了解一些更高级的算法或者可以开始刷题来训练自己的代码能力。
