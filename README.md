@@ -55,3 +55,8 @@ sp19/fa20 lecture: https://www.bilibili.com/video/BV1EJ411n72e?p=1&vd_source=231
 sp23: 自行魔法
 
 sp18 gradescope entry code：MNXYKX；sp18的永久开放(虽然还有76年)，其他版本的有的暂时开放，有的不开放，自行搜索。
+
+## 鸣谢
+感谢Josh Hug教授的精彩授课，以及慷慨地将几乎所有的资料都公开了，也感谢UCBerkeley的开源精神，能够让世界各地的人能够接触到如此优秀的教育资源！！！
+
+同时，如果本仓库对您有帮助，还恳请能够给我点上一颗小小的star，这也是对我最大的肯定！！！
